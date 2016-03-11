@@ -1,0 +1,2 @@
+include ':app', ':StackBlur', ':tess-two-release'
+include ':libraries:tess-two'
