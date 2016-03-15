@@ -5,7 +5,7 @@ compile fileTree(include: '*.jar', dir: 'libs')}
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '22.0.1'
+    buildToolsVersion '23.0.2'
 
     defaultConfig {
         renderscriptTargetApi 19

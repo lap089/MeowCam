@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -26,7 +28,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 //source of module StackBlur
 // https://github.com/kikoso/android-stackblur
-public class BlurActivity extends Activity {
+public class BlurActivity extends AppCompatActivity {
 
 
     //use lib
@@ -223,6 +225,14 @@ public class BlurActivity extends Activity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == android.R.id.home) {
+            Intent intent = new Intent(this, ImageEditorActivity.class);
+            intent.putExtra(getResources().getString(R.string.extra_raw_image_path),rawPath);
+            NavUtils.navigateUpTo(BlurActivity.this, intent);
+            overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+            return true;
+
         }
 
         return super.onOptionsItemSelected(item);

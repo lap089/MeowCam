@@ -1,9 +1,11 @@
 package com.example.user.test_camera.MainSource;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -11,6 +13,7 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.Surface;
 
 import com.example.user.test_camera.R;
 
@@ -69,9 +72,11 @@ public class BitmapHelper {
 
     public static Bitmap getScaleBitmapFromBitmap(Bitmap bitmap)
     {
-        double width = MainActivity.size.x, height;//// FIXME: 8/24/2015  why MainActivity ?
+        double width = MainActivity.size.x;
+
         if(width < bitmap.getWidth())
         {
+
             double scalar = (double) bitmap.getWidth()/width;
             double dwidth = ((double)bitmap.getWidth())/scalar;
             double dheight = bitmap.getHeight()/scalar;
@@ -122,6 +127,28 @@ public class BitmapHelper {
         //  context.startActivity(intent);
         Activity activity = (Activity) context;
         NavUtils.navigateUpTo(activity, intent);
+    }
+
+
+    @SuppressWarnings("deprecation")
+    @SuppressLint("NewApi")
+    public static void lockOrientation(Activity context) {
+        int rotation = context.getWindowManager().getDefaultDisplay().getRotation();
+
+        switch(rotation) {
+            case Surface.ROTATION_180:
+                context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                break;
+            case Surface.ROTATION_270:
+                context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                break;
+            case  Surface.ROTATION_0:
+                context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                break;
+            case Surface.ROTATION_90:
+                context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                break;
+        }
     }
 
 

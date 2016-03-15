@@ -4,6 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background1"
     tools:context="com.example.user.test_camera.MainSource.BrightnessContrastActivity"
     android:orientation="vertical">
 
@@ -13,17 +14,44 @@
         android:layout_height="0dp"
         android:layout_weight="0.93"
         />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:scaleType="fitCenter"
+            android:src="@drawable/brightness"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
     <SeekBar
         android:id="@+id/mBrightnessSeekBar_id"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:scaleType="fitCenter"
+            android:src="@drawable/contrast"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
     <SeekBar
         android:id="@+id/mContrastSeekBar_id"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+    </LinearLayout>
+
     <Button
-        android:text="Save"
+        android:background="@drawable/savebutton"
         android:id="@+id/saveCurrentFrameButton_id"
+        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

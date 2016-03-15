@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@drawable/background1"
         >
         <android.opengl.GLSurfaceView
             android:id="@+id/mEffectView_id"
@@ -19,9 +20,10 @@
             android:layout_weight="0.93"
             />
         <Button
-            android:text="Save"
+            android:background="@drawable/savebutton"
             android:id="@+id/saveCurrentFrameButton_id"
             android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content" />
 
 

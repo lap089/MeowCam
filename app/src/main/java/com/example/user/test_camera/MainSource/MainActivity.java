@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -29,6 +31,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Surface;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -48,7 +51,7 @@ public class MainActivity extends ActionBarActivity {
 
    public static Camera camera;
     public static int currentcamera;
-private String path;
+private String path = null;
 private String imageName;
 public ImageView myImage;
     public static int currentId;
@@ -74,10 +77,11 @@ public ImageView myImage;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        lockOrientation();
         BitmapHelper.updatePicName(this);//update name from pref
         Intent receivedIntent = getIntent();
         String receivedAction = receivedIntent.getAction();
-        if(receivedAction.equals(Intent.ACTION_SEND)){
+        if(receivedAction != null && receivedAction.equals(Intent.ACTION_SEND)){
             Uri receivedUri = receivedIntent.getParcelableExtra(Intent.EXTRA_STREAM);
             Intent intent = new Intent(MainActivity.this, ImageEditorActivity.class);
             intent.putExtra(getResources().getString(R.string.extra_raw_image_path), getRealPathFromURI(receivedUri));
@@ -151,10 +155,12 @@ public ImageView myImage;
                 @Override
                 public void onClick(View arg0) {
 
-                    Intent intent = new Intent(MainActivity.this, ImageEditorActivity.class);
-                    intent.putExtra(getResources().getString(R.string.extra_raw_image_path), path);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+                    if(path != null) {
+                        Intent intent = new Intent(MainActivity.this, ImageEditorActivity.class);
+                        intent.putExtra(getResources().getString(R.string.extra_raw_image_path), path);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+                    }
                 }
             });
 
@@ -184,6 +190,9 @@ public ImageView myImage;
             setupDrawer();
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
+
+      //      new OcrDownloader(this).unpackZip(Environment
+      //              .getExternalStorageDirectory().toString() + "/SimpleAndroidOCR/tessdata/", "jpn.zip");
 
         }
     }
@@ -216,7 +225,26 @@ public ImageView myImage;
     };
 
 
+    @SuppressWarnings("deprecation")
+    @SuppressLint("NewApi")
+    private void lockOrientation() {
+        int rotation = getWindowManager().getDefaultDisplay().getRotation();
 
+        switch(rotation) {
+            case Surface.ROTATION_180:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                break;
+            case Surface.ROTATION_270:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                break;
+            case  Surface.ROTATION_0:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                break;
+            case Surface.ROTATION_90:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                break;
+        }
+    }
 
     private String getRealPathFromURI(Uri contentURI) {
         String result;

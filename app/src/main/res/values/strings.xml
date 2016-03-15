@@ -1,19 +1,19 @@
 <resources>
-    <string name="app_name">Test_camera</string>
+    <string name="app_name">MeowCam</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_image_editor">ImageEditorActivity</string>
-    <string name="title_activity_orc">OrcActivity</string>
-    <string name="title_activity_blur">BlurActivity</string>
+    <string name="title_activity_image_editor">Image Editor</string>
+    <string name="title_activity_orc">Optical Character Recognition</string>
+    <string name="title_activity_blur">Blur</string>
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="facebook_id">1680081728874099</string>
     <string name="extra_raw_image_path">EXTRA_RAW_IMAGE_PATH</string>
     <string name="extra_raw_image_name">EXTRA_RAW_IMAGE_NAME</string>
-    <string name="title_activity_brightness_contrast">BrightnessContrastActivity</string>
-    <string name="title_activity_filter">FilterActivity</string>
-
+    <string name="title_activity_brightness_contrast">Brightness Contrast</string>
+    <string name="title_activity_filter">Filter</string>
+    <string name="title_activity_qrscaner">QRSCANER</string>
     <string-array name="filter">
         <item>None</item>
         <item>Crossprocess</item>
@@ -25,7 +25,6 @@
         <item>Sepia</item>
         <item>Sharpen</item>
     </string-array>
-    <string name="title_activity_selection">SelectionActivity</string>
     <drawable name="Blue">#b0e0e6</drawable>
     <drawable name="white">#80ffffff</drawable>
     <drawable name="black">#000000</drawable>
@@ -38,7 +37,7 @@
     <drawable name="PowderBlue">#b0e0e6</drawable>
     <drawable name="brown">#2F1700</drawable>
     <drawable name="darkgrey">#606060</drawable>
-    <string name="title_activity_minor">MinorActivity</string>
+    <string name="title_activity_minor">Mirror</string>
     
     <array name="feature_icon">
         <item>@drawable/blur</item>
@@ -52,7 +51,10 @@
 
     <string name="title_activity_setting">Setting</string>
 
+    <string name="pref_ocr_index">PREF_OCR_INDEX</string>
     <string name="pref_pic_name">PREF_PIC_NAME</string>
     <string name="pref_picname_default_name">MeowPic</string>
+    <string name="pref_ocr_file_name">PREF_OCR_FILE_NAME</string>
+    <string name="pref_ocr_file_default_name">ocr_result</string>
 
 </resources>

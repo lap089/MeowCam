@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -36,7 +38,7 @@ public class QRCodeScanerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scanner_activity);
-
+        BitmapHelper.lockOrientation(QRCodeScanerActivity.this);
         frameLayout = (FrameLayout) findViewById(R.id.PlaceHolderFram);
 
         //TODO: init the result handler
@@ -128,6 +130,14 @@ public class QRCodeScanerActivity extends AppCompatActivity {
 
         if (id == R.id.action_flash){
             TurnFlashOnOff();
+        }
+
+        if (id == android.R.id.home) {
+            Intent intent = new Intent(this, MainActivity.class);
+            NavUtils.navigateUpTo(QRCodeScanerActivity.this, intent);
+            overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+            return true;
+
         }
 
         return super.onOptionsItemSelected(item);

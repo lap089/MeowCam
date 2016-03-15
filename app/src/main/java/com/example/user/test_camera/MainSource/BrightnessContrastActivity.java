@@ -1,6 +1,7 @@
 package com.example.user.test_camera.MainSource;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.effect.Effect;
 import android.media.effect.EffectContext;
@@ -9,6 +10,8 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +30,7 @@ import java.nio.IntBuffer;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-public class BrightnessContrastActivity extends Activity implements GLSurfaceView.Renderer {
+public class BrightnessContrastActivity extends AppCompatActivity implements GLSurfaceView.Renderer {
 
     private String LOG_TAG = BrightnessContrastActivity.class.getSimpleName();
 
@@ -259,6 +262,14 @@ public class BrightnessContrastActivity extends Activity implements GLSurfaceVie
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(this, ImageEditorActivity.class);
+            intent.putExtra(getResources().getString(R.string.extra_raw_image_path),rawPath);
+            NavUtils.navigateUpTo(this, intent);
+            overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+            return true;
+
+        }
 
         mEffectView.requestRender();
         return true;

@@ -16,7 +16,7 @@
 
 /*
  * This file is auto-generated. DO NOT MODIFY!
- * The source Renderscript file: D:\\APCS\\MobileDev\\Final Project\\mobidev_camera\\StackBlur\\src\\blur.rs
+ * The source Renderscript file: C:\\Users\\user\\Downloads\\Final Project\\MeowCam\\StackBlur\\src\\blur.rs
  */
 
 package com.enrique.stackblur;

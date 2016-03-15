@@ -20,7 +20,7 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_meowcam"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme" >
@@ -61,21 +61,31 @@
         </activity>
         <activity
             android:name=".MainSource.QRCodeScanerActivity"
-            android:label="@string/title_activity_image_editor"
-            android:parentActivityName=".MainSource.MainActivity" >
+            android:label="@string/title_activity_qrscaner">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainSource.MainActivity" />
         </activity>
         <activity
             android:name=".MainSource.OcrActivity"
             android:label="@string/title_activity_orc" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainSource.ImageEditorActivity" />
         </activity>
         <activity
             android:name=".MainSource.BlurActivity"
             android:label="@string/title_activity_blur" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainSource.ImageEditorActivity" />
         </activity>
         <activity
             android:name=".MainSource.BrightnessContrastActivity"
-            android:label="@string/title_activity_brightness_contrast"
-            android:parentActivityName=".MainSource.ImageEditorActivity" >
+            android:label="@string/title_activity_brightness_contrast">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainSource.ImageEditorActivity" />
         </activity>
         <activity
             android:name=".MainSource.FilterActivity"
@@ -84,7 +94,10 @@
         </activity>
         <activity
             android:name=".MainSource.SelectionActivity"
-            android:label="@string/title_activity_selection" >
+            android:label="@string/app_name" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainSource.MainActivity" />
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -92,12 +105,16 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name=".MainSource.MinorActivity"
+            android:name=".MainSource.MirrorActivity"
             android:label="@string/title_activity_minor" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainSource.ImageEditorActivity" />
         </activity>
         <activity
             android:name=".MainSource.SettingActivity"
-            android:label="@string/title_activity_setting" >
+            android:label="@string/title_activity_setting"
+            android:theme="@android:style/Theme.Holo.Dialog">
         </activity>
     </application>
 

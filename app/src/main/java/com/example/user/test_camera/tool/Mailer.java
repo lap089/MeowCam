@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import org.apache.http.protocol.HTTP;
+//import org.apache.http.protocol.HTTP;
 
 import java.io.File;
 
@@ -27,7 +27,7 @@ public class Mailer {
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
 // The intent does not have a URI, so declare the "text/plain" MIME type
-        emailIntent.setType(HTTP.PLAIN_TEXT_TYPE);
+      //  emailIntent.setType(HTTP.PLAIN_TEXT_TYPE);
         if (to!= null)
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{to}); // recipients
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);

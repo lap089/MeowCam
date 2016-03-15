@@ -5,7 +5,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.user.test_camera.MainSource.MinorActivity">
+    android:background="@drawable/background1"
+    tools:context="com.example.user.test_camera.MainSource.MirrorActivity">
 
 
         <ImageView
@@ -16,9 +17,10 @@
             android:layout_weight="0.93"
             />
         <Button
-            android:text="Save"
+            android:background="@drawable/savebutton"
             android:id="@+id/saveCurrentFrameButton_id"
             android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content" />
 
 

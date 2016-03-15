@@ -29,6 +29,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.user.test_camera.R;
 import com.example.user.test_camera.tool.Mailer;
 import com.facebook.CallbackManager;
@@ -83,15 +85,11 @@ public class ImageEditorActivity extends ActionBarActivity {
 
     private String LOG_TAG = ImageEditorActivity.class.getSimpleName();
 
-    public int BLUR = 0;
-    public int MINOR = 1;
+
     private CallbackManager callbackManager;
-    private ImageView imageview;
-  //  private Button orc;
-  //  private ImageButton Minorbutton;
+    private SubsamplingScaleImageView imageview;
     private String path;
     private String imageName;
-    private Bitmap bitmap;
 
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
@@ -119,11 +117,12 @@ public class ImageEditorActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_editor);
-
-        imageview = (ImageView) findViewById(R.id.imageview);
+        BitmapHelper.lockOrientation(this);
+        imageview = (SubsamplingScaleImageView) findViewById(R.id.imageview);
         pager = (ViewPager) findViewById(R.id.pager);
         path = getIntent().getExtras().getString(getResources().getString(R.string.extra_raw_image_path), null);
-        CurrentFile = getIntent().getExtras().getInt("CurrentFile",-1);
+
+        CurrentFile = getIntent().getExtras().getInt("CurrentFile", -1);
 
         Log.d(LOG_TAG,"path = "+path);
         Log.d(LOG_TAG,"CurrentFile = "+CurrentFile);
@@ -142,7 +141,7 @@ public class ImageEditorActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Mailer send = new Mailer(ImageEditorActivity.this);
                 File mFile = new File(path);
-                send.SendMail(null,"MeowPic from MeowCam","MeowPic from MeowCam",mFile);
+                send.SendMail(null,"Picture from MeowCam","Picture from MeowCam",mFile);
             }
         });
 
@@ -155,33 +154,14 @@ public class ImageEditorActivity extends ActionBarActivity {
         });
 
 
-        //    Minorbutton = (ImageButton) findViewById(R.id.minor);
-    //    orc = (Button) findViewById(R.id.orc);
-
-       // imageName = getIntent().getExtras().getString(getResources().getString(R.string.extra_raw_image_name),null);
         File imgFile = new File(path);
         imageName = imgFile.getName();
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
+
         mDrawerList = (ListView)findViewById(R.id.list_feature_nav);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
         mDrawerList.setAdapter(new AdapterFeature(this,path,imageName));
 
-        bitmap = BitmapHelper.getScaleBitMapFromFile(path);
-        /*bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-        if(bitmap!=null) {
-            //     int nh = (int) (bitmap.getHeight() * (512.0 / bitmap.getWidth()));
-            //     Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 512, nh, true);
-            //     bitmap = scaled;
-            //      if(size.x < bitmap.getWidth() && size.y < bitmap.getHeight())
-            //    {
-          //  double scale = (double) size.x/bitmap.getWidth();
-          //  Bitmap scaled = Bitmap.createScaledBitmap(bitmap,size.x/2 , size.y/2, true);
-            bitmap = BitmapHelper.getScaleBitmapFromBitmap(bitmap);
-            //  }
-        }*/
 
         if(CurrentFile != -1) {
             imageview.setVisibility(View.GONE);
@@ -189,7 +169,7 @@ public class ImageEditorActivity extends ActionBarActivity {
             file = (ArrayList<File>) getIntent().getExtras().getSerializable("ImageFiles");
             pager.setAdapter(new AdapterPager(this,ImageEditorActivity.this,file));
             pager.setCurrentItem(CurrentFile);
-            pager.setPageTransformer(true, new CubeOutTransformer());
+            pager.setPageTransformer(true, new FlipHorizontalTransformer());
             pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -208,10 +188,11 @@ public class ImageEditorActivity extends ActionBarActivity {
             });
         }
         else {
-            imageview.setImageBitmap(bitmap);
 
+            new LoadImageAsyn(path,imageview,this).execute();
         }
 
+//I/Choreographer
 
         setupDrawer();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

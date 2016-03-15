@@ -1,11 +1,13 @@
 package com.example.user.test_camera.MainSource;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -95,6 +97,13 @@ public class SelectionActivity extends AppCompatActivity implements android.supp
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == android.R.id.home) {
+            Intent intent = new Intent(this, MainActivity.class);
+            NavUtils.navigateUpTo(SelectionActivity.this, intent);
+            overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+            return true;
+
         }
 
         return super.onOptionsItemSelected(item);
